@@ -11,12 +11,12 @@ class Population:
     @staticmethod
     def row2dict(row: list):
         d = dict()
-        d["household_no"] = row[4]
-        d["people_total"] = row[5]
-        d["people_total_m"] = row[6]
-        d["people_total_f"] = row[7]
-        d["people_m"] = row[8:][::2]
-        d["people_f"] = row[9:][::2]
+        d["household_no"] = float(row[4])
+        d["people_total"] = float(row[5])
+        d["people_total_m"] = float(row[6])
+        d["people_total_f"] = float(row[7])
+        d["people_m"] = [float(t) for t in row[8:][::2]]
+        d["people_f"] = [float(t) for t in row[9:][::2]]
         return d
 
     def __init__(self):
