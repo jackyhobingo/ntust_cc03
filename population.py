@@ -32,7 +32,8 @@ class Population:
             # replace 全形空白
             for x in range(2, row_len):
                 rows[x][1] = rows[x][1].replace(" ", "")
+                rows[x][1] = rows[x][1].replace("臺", "台")
+                rows[x][2] = rows[x][2].replace("臺", "台")
                 if "\u3000" in rows[x][2]:
                     rows[x][2] = rows[x][2].replace("\u3000", "")
                 self.add_to_dict(rows[x])
-        print(self.d["臺北市士林區公館里"])
