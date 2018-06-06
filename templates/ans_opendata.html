@@ -1,0 +1,576 @@
+  <!DOCTYPE html>
+<html>
+		<title></title>
+		<meta charset="utf-8" />
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">-->
+  <head>
+ 
+  <style>
+	.slidecontainer {
+		width: 100%;
+	}
+
+	.slider {
+		-webkit-appearance: none;
+		width: 100%;
+		height: 25px;
+		background: #d3d3d3;
+		outline: none;
+		opacity: 0.7;
+		-webkit-transition: .2s;
+		transition: opacity .2s;
+	}
+
+	.slider:hover {
+		opacity: 1;
+	}
+
+	.slider::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 25px;
+		height: 25px;
+		background: #4CAF50;
+		cursor: pointer;
+	}
+
+	.slider::-moz-range-thumb {
+		width: 25px;
+		height: 25px;
+		background: #4CAF50;
+		cursor: pointer;
+	}
+	</style>
+<style type="text/css">
+.form-style-5{
+    max-width: 1500px;
+	max-height: 500px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    margin: 10px auto;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+.form-style-5 fieldset{
+    border: none;
+}
+.form-style-5 legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+.form-style-5 label {
+    display: block;
+    margin-bottom: 8px;
+}
+.form-style-5 input[type="text"],
+.form-style-5 input[type="date"],
+.form-style-5 input[type="datetime"],
+.form-style-5 input[type="email"],
+.form-style-5 input[type="number"],
+.form-style-5 input[type="search"],
+.form-style-5 input[type="time"],
+.form-style-5 input[type="url"],
+.form-style-5 textarea,
+.form-style-5 select {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: rgba(255,255,255,.1);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 0;
+    outline: 0;
+    padding: 7px;
+    width: 100%;
+    box-sizing: border-box; 
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    background-color: #e8eeef;
+    color:#8a97a0;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-bottom: 30px;
+    
+}
+.form-style-5 input[type="text"]:focus,
+.form-style-5 input[type="date"]:focus,
+.form-style-5 input[type="datetime"]:focus,
+.form-style-5 input[type="email"]:focus,
+.form-style-5 input[type="number"]:focus,
+.form-style-5 input[type="search"]:focus,
+.form-style-5 input[type="time"]:focus,
+.form-style-5 input[type="url"]:focus,
+.form-style-5 textarea:focus,
+.form-style-5 select:focus{
+    background: #d2d9dd;
+}
+.form-style-5 select{
+    -webkit-appearance: menulist-button;
+    height:35px;
+}
+.form-style-5 .number {
+    background: #1abc9c;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 15px 15px 15px 0px;
+}
+
+.form-style-5 input[type="submit"],
+.form-style-5 input[type="button"]
+{
+    position: relative;
+    display: block;
+    padding: 19px 39px 18px 39px;
+    color: #FFF;
+    margin: 0 auto;
+    background: #1abc9c;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    width: 100%;
+    border: 1px solid #16a085;
+    border-width: 1px 1px 3px;
+    margin-bottom: 10px;
+}
+.form-style-5 input[type="submit"]:hover,
+.form-style-5 input[type="button"]:hover
+{
+    background: #109177;
+}
+</style>
+
+    <style>
+       #map {
+        height: 800px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body class="is-preload">
+
+
+<div class="slidecontainer">
+		<h2>選擇走路時間能到的範圍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;時間: <span id="demo_walk"></span> 分鐘</h2>
+		<input type="range" min="1" max="60" value="20" onchange = "change()" onchange = "change()" class="slider" id="walk">
+
+	</div>
+
+ <div class="form-style-5">
+ <FORM NAME="my_form" METHOD=POST TARGET>
+	
+    <INPUT TYPE="checkbox"  NAME="check1">男生 年齡區間  <input type="text" name="bminage"  placeholder="最小值"> <input type="text" name="bmaxage" placeholder="最大值">
+    <INPUT TYPE="checkbox"  NAME="check2">女生 年齡區間  <input type="text" name="gminage"  placeholder="最小值"> <input type="text" name="gmaxage" placeholder="最大值">
+    <input type="button" value="人口顯示" name="B1" onClick="getvalue();">
+    <!--onClick="choice(this.form)">-->
+ </FORM>
+
+ <p>
+ 男生總人數 : <span id="b_count"></span>
+   女生總人數 : <span id="g_count"></span>
+   總人數 : <span id="total_count"></span>
+ </p>
+ </div>
+	<script>
+
+		function getvalue() {
+			var str = "";
+			var bmin, bmax, gmin, gmax;//男生最小年紀,男生最大年紀,女生最小年紀,女生最大年紀
+			var b_person_count = 0;//男生總人數
+			var g_person_count = 0;//女生總人數
+					str = str + document.my_form.check1.checked+" "; 
+					str = str + document.my_form.check2.checked+" "; 
+					bmin = parseInt(document.my_form.bminage.value);
+					bmax = parseInt(document.my_form.bmaxage.value);
+					gmin = parseInt(document.my_form.gminage.value);
+					gmax = parseInt(document.my_form.gmaxage.value);
+					if(document.my_form.check1.checked){
+						for(var i = bmin; i <= bmax; i++ ) {
+							b_person_count += parseInt(myobj.people_m[i]);
+						}
+					}
+					if(document.my_form.check2.checked){
+						for(var i = gmin; i <= gmax; i++ ) {
+							g_person_count += parseInt(myobj.people_m[i]);/////////要修改地方
+						}
+					}
+					document.getElementById("b_count").innerHTML = b_person_count.toString();
+					document.getElementById("g_count").innerHTML = g_person_count.toString();
+			var total = b_person_count + g_person_count;
+					document.getElementById("total_count").innerHTML = total.toString();
+
+
+		}
+	</script>
+	<p id ="abc"></p>
+	<script>
+	var myobj = {'people_m' : [ '7', '10', '4', '6', '5', '6', '8', '4', '3', '4', '8', '1', '4', '7', '8', '5', '8', '6', '12', '6', '6', '10', '6', '8', '7', '4', '12', '11', '11', '15', '6', '7', '14', '9', '7', '14', '9', '10', '8', '11', '14', '8', '13', '11', '13', '13', '14', '15', '14', '17', '21', '11', '17', '13', '7', '14', '15', '17', '13', '10', '14', '19', '11', '14', '10', '14', '13', '16', '7', '13', '8', '3', '3', '7', '4', '2', '10', '10', '6', '5', '5', '3', '2', '3', '2', '2', '2', '0', '2', '4', '2', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0'], 'people_total_f': '745', 'people_total': '1539', 'household_no': '567', 'people_f': ['5', '5', '6', '9', '11', '2', '6', '5', '1', '1', '6', '3', '3', '6', '5', '7', '6', '10', '8', '10', '14', '9', '9', '9', '4', '9', '12', '7', '14', '5', '10', '8', '9', '7', '13', '11', '11', '11', '19', '12', '12', '8', '11', '12', '7', '14', '10', '18', '7', '8', '11', '11', '15', '9', '12', '12', '10', '15', '11', '10', '5', '7', '8', '13', '12', '13', '4', '10', '7', '8', '5', '7', '9', '7', '8', '7', '10', '9', '3', '8', '8', '4', '4', '5', '2', '3', '5', '1', '4', '1', '1', '1', '2', '1', '0', '1', '0', '0', '0', '0', '1'], 'people_total_m': '794'};
+	
+	</script>
+	<div id="map"></div>
+	<script src = "http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	
+	
+	
+	
+	
+    <script>
+	var map;
+	var marker;//中心點的標記
+    var marker_pos;//中心點的經緯度
+	var markers = [];
+	var marker_lat ;//中心點的緯度
+	var marker_lng ;//中心點的經度
+	var cityCircle;
+	var cityCircles = [];
+	var random_marker_lat = [];//隨機的產生點的緯度
+	var random_marker_lng = [];//隨機的攙生點的經度
+	var slider_walk = document.getElementById("walk");
+	var output_walk = document.getElementById("demo_walk");
+	output_walk.innerHTML = slider_walk.value;
+	slider_walk.oninput = function() {
+	output_walk.innerHTML = this.value;
+	}
+	function change() {
+    clearCircle();
+    //clearMarkers();
+	
+	cityCircle = new google.maps.Circle({
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35,
+    map: map,
+    center: marker.position,
+    radius: slider_walk.value*80
+    });
+	cityCircles.push(cityCircle);
+	
+	}
+	
+	//在圈內隨機產生100點
+	function random_gen_point(radius) {
+		random_marker_lat = [];
+		random_marker_lng = [];
+		for(var i = 0; i < 20; i++) {
+			var x;
+			var y;
+			var r = 2 * radius;
+			while(true) {
+				x = (Math.random() * r) -radius;
+				y = (Math.random() * r) -radius;
+				if(Math.pow(x,2) + Math.pow(y,2) < Math.pow(radius,2)) {
+					break;
+				}
+			}
+			var new_lat = marker_lat + (x/110574);
+			var new_lng = marker_lng + y/111320*Math.cos(marker_lat);
+			random_marker_lat.push(new_lat);
+			random_marker_lng.push(new_lng);
+		}
+		for(var i = 0; i < 20; i++) {
+			var marker_random = new google.maps.Marker({
+			position: {lat:random_marker_lat[i],lng: random_marker_lng[i]},
+			map: map
+			});
+			markers.push(marker_random);
+		}
+	}
+	
+    function initMap() {
+        var ntust = {lat: 25.014245, lng: 121.541503};
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: ntust
+        });
+		
+        var marker = new google.maps.Marker({
+          position: ntust,
+          map: map
+        });
+		
+		markers.push(marker);
+		//map.data.loadGeoJson('100demo.json');
+		//map.data.setStyle({visible: false});
+		google.maps.event.addListener(map, 'click', function(event) {
+		deleteMarkers();
+		deletecircles();
+		placeMarker(map, event.latLng);
+		});
+      }
+	  
+	function placeMarker(map, location) {
+		marker = new google.maps.Marker({
+		position: location,
+		map: map
+		});
+		marker_pos = marker.getPosition();
+		marker_lat = location.lat();
+		marker_lng = location.lng();
+		markers.push(marker);
+		
+		cityCircle = new google.maps.Circle({
+		strokeColor: '#FF0000',
+		strokeOpacity: 0.8,
+		strokeWeight: 2,
+		fillColor: '#FF0000',
+		fillOpacity: 0.35,
+		map: map,
+		center: {lat: location.lat(), lng: location.lng()},
+		radius: slider_walk.value*80
+		});
+		
+		cityCircles.push(cityCircle);
+		var infowindow = new google.maps.InfoWindow({
+		content: 'Lat: ' + location.lat() + '<br>Lng: ' + location.lng()
+		});
+		infowindow.open(map,marker);
+	}
+	// Sets the map on all markers in the array.
+    function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+		
+		for(var i = 0; i < cityCircles.length; i++) {
+		cityCircles[i].setMap(map);
+		}
+    }
+	
+	function clearCircle() {
+		for(var i = 0; i < cityCircles.length; i++) {
+			cityCircles[i].setMap(null);
+			}
+	}
+	
+     // Removes the markers from the map, but keeps them in the array.
+    function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+    }
+	
+	function deleteMarkers() {
+        clearMarkers();
+        markers = [];
+    }
+	
+	function deletecircles() {
+		clearCircle();
+		cityCircles = [];
+	}
+	
+	
+    function addMarker(location, map) {
+        // Add the marker at the clicked location, and add the next-available label
+        // from the array of alphabetical characters.
+        var marker = new google.maps.Marker({
+                                            position: location,
+                                            map: map
+                                            });
+        markers.push(marker);
+    }
+	
+    </script>
+    <script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ9mL5mbmuTCNGunaosws3VeCHhI5ADFo&callback=initMap">
+    </script>
+	<style>
+
+.axis path,
+.axis line{
+	fill: none;
+	stroke: black;
+	shape-rendering: crispEdges;
+}
+ 
+.axis text {
+	font-family: sans-serif;
+	font-size: 11px;
+}
+
+.rect {
+	fill: steelblue;
+}
+
+.linePath {
+	fill: none;
+	stroke: black;
+	stroke-width: 3px;
+}
+
+</style>
+</head> 
+<body>  
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script>
+	$( document ).ready(function() {
+ $.getJSON("http://140.118.155.207:8080/?la=23.994500&lo=121.316029&r=200", function(data){ 
+     var employee_data = '';
+      $.each(data, function(key, value){
+          employee_data += '<tr>';
+          employee_data += '<td>'+value.people_total_m+'</td>';
+          employee_data += '<td>'+people_total_f+'</td>';
+          employee_data += '<td>'+household_no+'</td>';
+          employee_data += '</tr>';
+      });
+         alert(employee_data);
+  });
+ });
+
+</script>
+	<script>
+	/*
+	var width  = 500;	//SVG绘制区域的宽度
+	var height = 500;	//SVG绘制区域的高度
+			
+	var svg = d3.select("body")			//选择<body>
+				.append("svg")			//在<body>中添加<svg>
+				.attr("width", width)	//设定<svg>的宽度属性
+				.attr("height", height);//设定<svg>的高度属性
+	
+	//1. 确定初始数据
+	
+	//创建一个生成正态分布的函数，其中平均值为170，标准差为10
+	var rand = d3.random.normal(100,20);
+	
+	//定义一个数组，用于保存正态分布生成的数值
+	var dataset = [];
+	
+	//根据正态分布生成100个随机数，插入到数组dataset中
+	for(var i=0; i<100; i++){
+		dataset.push( rand()*10 );
+	}
+	
+	//输出数组到控制台
+	console.log(dataset);
+
+	//2. 转换数据
+	
+	var binNum = 10,
+		rangeMin = 0,
+		rangeMax = 100;
+		
+	var histogram = d3.layout.histogram()
+						.range([rangeMin, rangeMax])	//数据分布的范围
+						.bins(binNum)	//bins的数量
+						.frequency(true);	//按照数量统计的方式
+	
+	var hisData = histogram(dataset);
+	console.log(hisData);
+	
+	//3. 绘制
+	
+	//定义x轴比例尺
+	var xAxisWidth = 450,
+		xTicks = hisData.map( function(d){ return d.x; } );
+	
+	var xScale = d3.scale.ordinal()
+					.domain(xTicks)
+					.rangeRoundBands([10, xAxisWidth],0.1);
+	
+	
+	//定义y轴比例尺
+	var yAxisWidth = 450;
+
+	var yScale = d3.scale.linear()
+					.domain([ d3.min(hisData, function(d){ return d.y; }),
+							  d3.max(hisData, function(d){ return d.y; }) ])
+					.range([50, yAxisWidth]);
+					
+	//外边框
+	var padding = { top: 30 , right: 30, bottom: 30, left: 30 };
+	
+	//绘制x轴
+	var xAxis = d3.svg.axis()
+				.scale(xScale)
+				.orient("bottom")
+				.tickFormat(d3.format(".0f"));
+					
+	svg.append("g")
+			.attr("class","axis")
+			.attr("transform","translate(" + padding.left + "," + (height - padding.bottom) +  ")")
+			.call(xAxis);
+	
+	console.log(xScale.range());
+	console.log(xScale.rangeBand());
+	console.log(xScale(0));
+	console.log(xScale(10));
+	
+	//绘制矩形
+	var gRect = svg.append("g")
+					.attr("transform","translate(" + padding.left + "," + ( -padding.bottom ) +  ")")
+					.style("opacity",1.0);
+	
+	gRect.selectAll("rect")
+			.data(hisData)
+			.enter()
+			.append("rect")
+			.attr("class","rect")
+			.attr("x",function(d,i){	//x坐标
+				return xScale(d.x);
+			})
+			.attr("y", function(d,i){	//y坐标
+				return height - yScale(d.y);
+			})
+			.attr("width", function(d,i){	//宽度
+				return xScale.rangeBand(); 
+			})
+			.attr("height", function(d){	//高度
+				return yScale(d.y);
+			});
+			
+	//绘制曲线		
+	var lineGenerator = d3.svg.line()
+							.x(function(d){ return xScale(d.x); })
+							.y(function(d){ return height - yScale(d.y); })
+							.interpolate("basis");
+	
+	var gLine = svg.append("g")
+					.attr("transform","translate(" + padding.left + "," + ( -padding.bottom ) +  ")")
+					.style("opacity",0.0);
+	
+	gLine.append("path")
+		.attr("class","linePath")
+		.attr("d",lineGenerator(hisData));
+			
+	
+
+	function showRect(){
+		//显示矩形，不显示曲线
+		gRect.style("opacity",1.0);
+		gLine.style("opacity",0.0);
+	}
+	
+	function showLine(){
+		//显示曲线，不显示矩形
+		gRect.style("opacity",0.0);
+		gLine.style("opacity",1.0);
+	}
+			*/
+	</script>	
+	<br />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+		
+</body>  
+	<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+  </body>
+</html>

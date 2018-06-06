@@ -1,9 +1,12 @@
 from population import Population
 from village import Village
 from compute import list_add
-from flask import Flask, request
+from flask import Flask, request, render_template, Blueprint, send_from_directory
 from config import DevConfig
 import json
+from jinja2 import Template
+
+profile = Blueprint('opendata_final', __name__)
 
 p = Population()
 v = Village()
@@ -67,8 +70,9 @@ def carry(population_data):
     return result
 
 
-app = Flask(__name__)
-app.config.from_object(DevConfig)
+app = Flask(__name__, static_url_path='')
+# app.register_blueprint(profile)
+# app.config.from_object(DevConfig)
 blank = {}
 @app.route("/")
 def hello():
@@ -82,6 +86,40 @@ def hello():
     except:
 
         return json.dumps(blank)
+@app.route('/<path:path>')
+def static_file(path):
+    return app.send_static_file(path)
+
+@app.route('/index.html')
+def index():
+    return render_template("index.html")
+
+@app.route('/opendata.html')
+def opendata():
+
+    try:
+        latitude = request.args.get("la")
+        longitude = request.args.get("lo")
+        radius = request.args.get("r")
+        d = get_population(float(latitude), float(longitude), float(radius))
+        print(d)
+        return json.dumps(d)
+    except:
+
+        return render_template("opendata.html")
+@app.route('/assets/js/<path:path>')
+def send_js(path):
+    return send_from_directory('assets/js', path)
+
+@app.route('/assets/css/<path:path>')
+def send_css(path):
+    return send_from_directory('assets/css', path)
+@app.route('/images/<path:path>')
+def send_images(path):
+    return send_from_directory('images', path)
+@app.route('/assets/fonts/<path:path>')
+def send_fonts(path):
+    return send_from_directory('assets/fonts', path)
 
 if __name__ == "__main__":
 
